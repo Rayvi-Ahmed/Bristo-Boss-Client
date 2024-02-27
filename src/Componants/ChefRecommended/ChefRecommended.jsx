@@ -1,51 +1,43 @@
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import SectionTitle from '../SectionTitle/SectionTitle';
-import saladImages from '../../../src/assets/home/slide2.jpg'
+import RecommendedData from './RecommendedData/RecommendedData';
 
 const ChefRecommended = () => {
-    return (
-       <section>
+const [item,setItem]=useState([])
+
+
+useEffect(()=>{
+  fetch('menu.json')
+  .then(res=>res.json())
+  .then(data=>{
+
+    const recommendedData=data.filter(food=>food.category==='recom') 
+    setItem(recommendedData)
+  })
+},[])
+
+  return (
+   <section className='mb-10 max-w-screen-lg mx-auto'>
 <SectionTitle
-SubTitle={'should try'}
-heading={'chef recommended'}
+SubTitle={'Check it out'}
+heading={'Chef Recommended'}
+
 ></SectionTitle>
+<div className='flex flex-col md:flex-row gap-3'>
 
-<div className='mb-10'>
-    <div className='flex flex-row items-center gap-8 mx-auto'>
-        
-      <div className='w-[200px] lg:w-[350px] bg-gray-100 shadow-lg'>
-      <img src={saladImages} className='mx-auto h-[30%] lg:w-full p-3' alt="" />
-        <div className='flex flex-col gap-2 text-center p-3'>
-            <h3 className='uppercase text-slate-600 font-bold'>Caser Salad</h3>
-            <p className='text-sm text-slate-600'>Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-            <button className='border border-b-4 rounded-lg border-b-yellow-600 p-3 text-yellow-600'>ADD TO CART</button>
-        </div>
-
-      </div>
-      <div className='w-[200px] lg:w-[350px] bg-gray-100 shadow-lg'>
-      <img src={saladImages} className='mx-auto h-[30%] lg:w-full p-3' alt="" />
-        <div className='flex flex-col gap-2 text-center p-3'>
-            <h3 className='uppercase text-slate-600 font-bold'>Caser Salad</h3>
-            <p className='text-sm text-slate-600'>Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-            <button className='border border-b-4 rounded-lg border-b-yellow-600 p-3 text-yellow-600'>ADD TO CART</button>
-        </div>
-
-      </div>
-      <div className='w-[200px] lg:w-[350px] bg-gray-100 shadow-lg'>
-      <img src={saladImages} className='mx-auto h-[30%] lg:w-full p-3' alt="" />
-        <div className='flex flex-col gap-2 text-center p-3'>
-            <h3 className='uppercase text-slate-600 font-bold'>Caser Salad</h3>
-            <p className='text-sm text-slate-600'>Lettuce, Eggs, Parmesan Cheese, Chicken Breast Fillets.</p>
-            <button className='border border-b-4 rounded-lg border-b-yellow-600 p-3 text-yellow-600'>ADD TO CART</button>
-        </div>
-
-      </div>
-     
-
-    </div>
+  {
+    item.map(fd=>(
+      <RecommendedData
+      key={fd._id}
+      fd={fd}
+      ></RecommendedData>
+    ))
+  }
 </div>
-       </section>
-    );
+
+   </section>
+  );
 };
 
 export default ChefRecommended;

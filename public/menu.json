@@ -348,7 +348,7 @@
         "name": "Goats Cheese Pizza",
         "recipe": "Roasted duck breast (served pink) with gratin potato and a griottine cherry sauce",
         "image": "https://cristianonew.ukrdevs.com/wp-content/uploads/2017/01/bbq-370x247.jpg",
-        "category": "pizza",
+        "category": "recom",
         "price": 14.5
     },
     {
@@ -404,7 +404,7 @@
         "name": "Escalope de Veau",
         "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
         "image": "https://cristianonew.ukrdevs.com/wp-content/uploads/2016/08/product-2-370x247.jpg",
-        "category": "offered",
+        "category": "recom",
         "price": 12.5
     },
     {
@@ -452,7 +452,7 @@
         "name": "Tuna Niçoise",
         "recipe": "Warm goats cheese and roasted vegetable salad with black olive tapenade crostini",
         "image": "https://cristianonew.ukrdevs.com/wp-content/uploads/2016/08/product-2-370x247.jpg",
-        "category": "soup",
+        "category": "recom",
         "price": 10.5
     }
 ]

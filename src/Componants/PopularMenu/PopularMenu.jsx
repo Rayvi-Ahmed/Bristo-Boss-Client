@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import MenuItem from '../../Shared/MenuItem/MenuItem';
 import SectionTitle from '../SectionTitle/SectionTitle';
