@@ -5,6 +5,8 @@ import BrandBanner from '../../Componants/BrandBanner/BrandBanner';
 import PopularMenu from '../../Componants/PopularMenu/PopularMenu';
 import ContactBanner from '../../Componants/ContactBanner/ContactBanner';
 import ChefRecommended from '../../Componants/ChefRecommended/ChefRecommended';
+import Fetured from '../../Componants/Fetured/Fetured';
+import Testimonial from '../../Componants/Testimonial/Testimonial';
 
 const Home = () => {
     return (
@@ -20,6 +22,8 @@ const Home = () => {
         <PopularMenu></PopularMenu>
         <ContactBanner></ContactBanner>
         <ChefRecommended></ChefRecommended>
+        <Fetured></Fetured>
+        <Testimonial></Testimonial>
             
         </div>
     );
