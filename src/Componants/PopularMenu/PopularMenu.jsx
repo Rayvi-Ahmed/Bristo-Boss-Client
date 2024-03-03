@@ -33,6 +33,10 @@ const PopularMenu = () => {
 }
 
 </div>
+<div className='my-4 text-center'>
+    <button className='tex-yellow-600 px-5 py-3 rounded-lg bg-slate-200 border border-b-yellow-500 hover:bg-slate-700 hover:text-yellow-600'>See All</button>
+</div>
+
       </section>
     );
 };

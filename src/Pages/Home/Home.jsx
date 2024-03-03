@@ -7,10 +7,17 @@ import ContactBanner from '../../Componants/ContactBanner/ContactBanner';
 import ChefRecommended from '../../Componants/ChefRecommended/ChefRecommended';
 import Fetured from '../../Componants/Fetured/Fetured';
 import Testimonial from '../../Componants/Testimonial/Testimonial';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
     return (
         <div>
+
+            <Helmet>
+                <title>Bristo Boss| Home</title>
+            </Helmet>
+
+
            <Banner></Banner>
         <div className='my-16'>
         <Category></Category>
