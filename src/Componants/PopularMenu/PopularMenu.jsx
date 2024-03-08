@@ -2,6 +2,7 @@
 import MenuItem from '../../Shared/MenuItem/MenuItem';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import useMenu from '../../Shared/Hook/useMenu';
+import { Link } from 'react-router-dom';
 
 const PopularMenu = () => {
    
@@ -32,7 +33,7 @@ const PopularMenu = () => {
 
         </div>
         <div className='my-4 text-center'>
-            <button className='tex-yellow-600 px-5 py-3 rounded-lg bg-slate-200 border border-b-yellow-500 hover:bg-slate-700 hover:text-yellow-600'>See All</button>
+         <Link to={'/menu'}> <button className='tex-yellow-600 px-5 py-3 rounded-lg bg-slate-200 border border-b-yellow-500 hover:bg-slate-700 hover:text-yellow-600'>See All</button></Link>
         </div>
 
       </section>

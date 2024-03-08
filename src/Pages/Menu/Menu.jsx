@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Helmet} from "react-helmet";
 import menuImage from '../../../src/assets/menu/banner3.jpg'
 import desserts from '../../../src/assets/menu/dessert-bg.jpeg'
@@ -14,11 +14,12 @@ import MenuItems from './MenuItems/MenuItems';
 const Menu = () => {
     const [menus]=useMenu([])
 
-    const pizza=menus.filter(pz=>pz.category==='pizza')
-    const dessert =menus.filter(pz=>pz.category==='dessert')
-    const soup=menus.filter(pz=>pz.category==='soup')
-    const offered=menus.filter(pz=>pz.category==='offered')
-    const salad=menus.filter(pz=>pz.category==='salad')
+
+    const pizza=menus.filter(pz=>pz.category==='pizza').slice(0,4)
+    const dessert =menus.filter(pz=>pz.category==='dessert').slice(0,4)
+    const soup=menus.filter(pz=>pz.category==='soup').slice(0,4)
+    const offered=menus.filter(pz=>pz.category==='offered').slice(0,4)
+    const salad=menus.filter(pz=>pz.category==='salad').slice(0,4)
 
     return (
         <div>
@@ -48,8 +49,6 @@ const Menu = () => {
             ></MenuItems>
 
 
-
-
             {/* Desserts Item  */}
 
             <SectionTitle
@@ -60,7 +59,7 @@ const Menu = () => {
 
             </SectionTitle>
 
-             <MenuItems
+             <MenuItems 
              items={dessert}
              title={"Desserts"}
              image={desserts}

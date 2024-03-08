@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const MenuItem = ({item}) => {
 
     const {name,price,recipe,image}=item
@@ -14,6 +15,9 @@ const MenuItem = ({item}) => {
                 </div>
                 <p className='text-yellow-600'>${price}</p>
             </div>
+
+         
+
         </div>
     );
 };
