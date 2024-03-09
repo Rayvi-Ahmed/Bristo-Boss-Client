@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-simple-captcha';
+import Lottie from 'react-lottie';
+import animationData from '../../assets/Animation - 1709958734719.json'
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -37,19 +41,34 @@ const Login = () => {
 
     }
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen bg-base-200 ">
+        
+
 
             {/* Image / Information */}
-        <div className="hero-content flex-col md:flex-row p-3">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6">Provident cupiditate voluptatem et  in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-          </div>
+        <div className="hero-content flex-col md:flex-row p-3 gap-3 max-w-screen-lg ">
+        
+        {/* Lottie Animation added */}
+        <Lottie
+         options={{
+          animationData: animationData,
+          loop: true,
+          autoplay: true
+        }}
+        width={500}
+        height={500}
+            
+        >
+
+        </Lottie>
 
 
 
          {/* form LOgin  */}
-          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-yellow-500">
+          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-transparent rounded-none md:ml-10">
+          <div className='py-2 w-full mx-auto'>
+            <h1 className='text-center text-2xl font-bold text-slate-600 underline underline-offset-8'>LOG IN</h1>
+          </div>
         
             <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
@@ -63,20 +82,23 @@ const Login = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input type="password" name='password' placeholder="password" className="input input-bordered rounded-none" required />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                </label>
+            
               </div>
 
               {/* Captha start */}
               <div className="form-control">
+
               <LoadCanvasTemplate />
                 <input  type="text" ref={capthcaRef} name='captcha' placeholder="Type above text" className="input input-bordered mb-2 rounded-none" required />
-                <button onClick={handleCaptcha} className="btn btn-outline btn-info btn-xs">Validate</button>
+                <button onClick={handleCaptcha} className="btn btn-outline btn-info btn-xs rounded-none">Captcha Validate</button>
         
               </div>
               <div className="form-control mt-6">
                 <button disabled={disable} className="btn btn-primary">Login</button>
+              </div>
+
+              <div className='text-center pt-2 text-slate-700'>
+                <p>Are you new here ?<Link to={'/signUp'}>Please Sign Up</Link></p>
               </div>
             </form>
           </div>
