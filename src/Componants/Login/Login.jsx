@@ -1,49 +1,48 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { loadCaptchaEnginge, LoadCanvasTemplate,validateCaptcha } from 'react-simple-captcha';
+import React, { useContext} from 'react';
 import Lottie from 'react-lottie';
 import animationData from '../../assets/Animation - 1709958734719.json'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation} from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 
-
+// react hook form 
+import { useForm} from "react-hook-form"
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
-    const capthcaRef=useRef(null)
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm()
 
-    const [disable,setDisable]=useState(true)
+  
 
-    useEffect(()=>{
-        loadCaptchaEnginge(6); 
-    },[])
+  const location = useLocation()
+  const from = location?.state?.pathname || '/'
+  const {Login}=useContext(AuthContext)
+ 
 
 
-    // Captcha Function 
-    const handleCaptcha=()=>{
-        const USER_CAPTCHA_VALUE=capthcaRef.current.value
 
-        // Captcha Validation 
-        if(validateCaptcha(USER_CAPTCHA_VALUE)){
-            setDisable(false)
-        }else{
-            setDisable(true)
-        }
+
+    const onSubmit = (data) => {
+      Login(data.email,data.password)
+      .then((result)=>{
+        const user = result.user 
+        console.log(user)
+      })
+
+      Swal.fire("Log in succeessfull !");
+      Navigate(from,{replace:true})
+  
     }
 
-    // Form Data Fucntion 
-
-    const handleLogin =(event)=>{
-       event.preventDefault()
-       const form = event.target
-       const email=form.email.value;
-       const password=form.password.value;
-
-       console.log(email,password)
-
-    }
+  
     return (
-        <div className="hero min-h-screen bg-base-200 ">
-        
 
+        <div className="hero  bg-base-200 ">
+      
 
             {/* Image / Information */}
         <div className="hero-content flex-col md:flex-row p-3 gap-3 max-w-screen-lg ">
@@ -59,46 +58,56 @@ const Login = () => {
         height={500}
             
         >
-
         </Lottie>
 
-
-
          {/* form LOgin  */}
-          <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-transparent rounded-none md:ml-10">
+          <div className="card shrink-0 w-full md:h-[600px] max-w-sm shadow-2xl bg-transparent rounded-none md:ml-10">
           <div className='py-2 w-full mx-auto'>
             <h1 className='text-center text-2xl font-bold text-slate-600 underline underline-offset-8'>LOG IN</h1>
           </div>
         
-            <form onSubmit={handleLogin} className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body -my-5">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input type="email" name='email' placeholder="email" className="input input-bordered rounded-none" required />
-              </div>
-              <div className="form-control">
+                <input type="email" {...register("email", { required: true, maxLength: 20 })} name='email' placeholder="email" className="input input-bordered rounded-none" required />
+                  
+                  
+                  {/* Error Alert  */}
+                {errors.name?.type==='required'&& <span className='text-sm text-red-600 text-center'>Name fill is required !</span>}
+                </div>
+                <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" name='password' placeholder="password" className="input input-bordered rounded-none" required />
+                
+                <input type="password" 
+
+                {...register("password", 
+                { required: true, 
+                  maxLength: 20,
+                  minLength:8,
+                  pattern:/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])$/
+                }, 
+
+                )}  name='password' placeholder="password" className="input input-bordered rounded-none" required />
+
+                   {/* Error Alert for Password  */}
+                   {errors.password?.type==='maxLength'&& <span className='text-sm text-red-600 text-center'>Password length should less 20 charecter</span>}
+
+                   {errors.password?.type==='minLength'&& <span className='text-sm text-red-600 text-center'>Password length should minimum 8 charecter</span>}
+            
+                   {errors.password?.type==='pattern'&& <span className='text-sm text-red-600 '>Password should be one uppercase one lowercase one special charecter & One number</span>}
             
               </div>
 
-              {/* Captha start */}
-              <div className="form-control">
 
-              <LoadCanvasTemplate />
-                <input  type="text" ref={capthcaRef} name='captcha' placeholder="Type above text" className="input input-bordered mb-2 rounded-none" required />
-                <button onClick={handleCaptcha} className="btn btn-outline btn-info btn-xs rounded-none">Captcha Validate</button>
-        
-              </div>
               <div className="form-control mt-6">
                 <button disabled={disable} className="btn btn-primary">Login</button>
+                <p className='text-center pt-2 mb-2 text-slate-700 text-sm'>Are you new here ?<Link to={'/signUp'}>Please Sign Up</Link></p>
               </div>
-
-              <div className='text-center pt-2 text-slate-700'>
-                <p>Are you new here ?<Link to={'/signUp'}>Please Sign Up</Link></p>
+              <div>
               </div>
             </form>
           </div>
