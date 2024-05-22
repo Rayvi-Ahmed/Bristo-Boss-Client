@@ -1,7 +1,7 @@
 import React, { useContext} from 'react';
 import Lottie from 'react-lottie';
 import animationData from '../../assets/Animation - 1709958734719.json'
-import { Link, Navigate, useLocation} from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate} from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 
 // react hook form 
@@ -19,7 +19,9 @@ const Login = () => {
   
 
   const location = useLocation()
-  const from = location?.state?.pathname || '/'
+  const navigate=useNavigate()
+  const from = location?.state?.from?.pathname || '/'
+
   const {Login}=useContext(AuthContext)
  
 
@@ -34,11 +36,10 @@ const Login = () => {
       })
 
       Swal.fire("Log in succeessfull !");
-      Navigate(from,{replace:true})
+      navigate(from,{replace:true})
+     
   
     }
-
-  
     return (
 
         <div className="hero  bg-base-200 ">
@@ -61,7 +62,7 @@ const Login = () => {
         </Lottie>
 
          {/* form LOgin  */}
-          <div className="card shrink-0 w-full md:h-[600px] max-w-sm shadow-2xl bg-transparent rounded-none md:ml-10">
+          <div className="card shrink-0 w-full md:h-[400px] max-w-sm shadow-2xl bg-transparent rounded-none md:ml-10">
           <div className='py-2 w-full mx-auto'>
             <h1 className='text-center text-2xl font-bold text-slate-600 underline underline-offset-8'>LOG IN</h1>
           </div>
@@ -88,7 +89,7 @@ const Login = () => {
                 { required: true, 
                   maxLength: 20,
                   minLength:8,
-                  pattern:/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])$/
+                  pattern:/(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
                 }, 
 
                 )}  name='password' placeholder="password" className="input input-bordered rounded-none" required />
@@ -104,7 +105,7 @@ const Login = () => {
 
 
               <div className="form-control mt-6">
-                <button disabled={disable} className="btn btn-primary">Login</button>
+                <button  className="btn btn-primary">Login</button>
                 <p className='text-center pt-2 mb-2 text-slate-700 text-sm'>Are you new here ?<Link to={'/signUp'}>Please Sign Up</Link></p>
               </div>
               <div>

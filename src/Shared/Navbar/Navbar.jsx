@@ -22,14 +22,7 @@ const Navbar = () => {
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/menu'}>Our Menu</Link></li>
         <li><Link to={'/order/salad'}>Order Food</Link></li>
-
-       { user? <>
-       <button onClick={hanglogOut} className='btn btn-ghost text-xl'>Log Out</button>
-       </>:
-      <li><Link to={'/login'}>Log In</Link></li>
-   
-       }
-        <li><Link to={'/about'}>About Us</Link></li>
+        <li><Link to={'/dashboard'}>Dashboard</Link></li>
     
     </>
 
@@ -53,9 +46,15 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Log In</a>
+
+        {
+          user? <a onClick={hanglogOut} className="btn">Log Out</a> 
+          : <Link to={'/login'}><a className="btn">Log In</a></Link>
+        }
+    
       </div>
-</div>
+    
+    </div>  
     );
 };
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import Lottie from 'react-lottie';
 import animationData from '../../assets/Animation - 1709958734719.json'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 
 // react hook form 
@@ -9,6 +9,10 @@ import { useForm} from "react-hook-form"
 import Swal from 'sweetalert2';
 
 const SignUp = () => {
+
+  const location =useLocation()
+  const navigate= useNavigate()
+  const from = location?.state?.from?.pathname || '/'
 
   // get Auth sign Up from Authprovider
   const {createUser}=useContext(AuthContext)
@@ -42,9 +46,12 @@ const SignUp = () => {
             icon: "success",
             title: "Signed in successfully"
           });
+          reset()
+
+          navigate(from,{replace:true})
         }
-        reset()
-        console.log(user)
+     
+      
      
       })
     
@@ -149,7 +156,7 @@ const SignUp = () => {
 
             
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary">Registered</button>
                 <p className='text-center pt-2 mb-2 text-slate-700 text-sm'>You have an account ?<Link to={'/login'}>Please Sign Up</Link></p>
               </div>
               <div>
