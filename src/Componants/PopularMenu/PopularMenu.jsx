@@ -8,7 +8,6 @@ const PopularMenu = () => {
    
     const [menus]=useMenu([])
     
-    console.log(menus)
 
 
     const popularMenu=menus.filter(item=>item.category==='popular')

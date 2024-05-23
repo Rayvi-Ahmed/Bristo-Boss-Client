@@ -25,9 +25,6 @@ const Login = () => {
   const {Login}=useContext(AuthContext)
  
 
-
-
-
     const onSubmit = (data) => {
       Login(data.email,data.password)
       .then((result)=>{

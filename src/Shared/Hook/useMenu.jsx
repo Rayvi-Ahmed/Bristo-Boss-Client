@@ -10,7 +10,7 @@ const [loading,setLoading]=useState(false)
         .then(res=>res.json())
         .then(data=>{
 
-            console.log(data)
+       
             setMenus(data)
             setLoading(true)
  

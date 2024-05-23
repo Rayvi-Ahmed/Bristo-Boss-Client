@@ -48,7 +48,18 @@ const Navbar = () => {
       <div className="navbar-end">
 
         {
-          user? <a onClick={hanglogOut} className="btn">Log Out</a> 
+          user? 
+          <>
+          <span className='text-gray-400 text-lg p-3 mx-9'>{user.displayName}</span>
+
+          <div className="avatar">
+           <div className="w-10 mx-5 rounded-full">
+            <img src={user.photoURL} />
+              </div>
+                   </div>
+          <a onClick={hanglogOut} className="btn">Log Out</a> 
+        
+          </>
           : <Link to={'/login'}><a className="btn">Log In</a></Link>
         }
     

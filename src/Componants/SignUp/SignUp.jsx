@@ -15,7 +15,7 @@ const SignUp = () => {
   const from = location?.state?.from?.pathname || '/'
 
   // get Auth sign Up from Authprovider
-  const {createUser}=useContext(AuthContext)
+  const {createUser,updateUserProfile}=useContext(AuthContext)
 
   // React hook form Meterials
   const {
@@ -27,35 +27,33 @@ const SignUp = () => {
 
 // Get User data from input fill 
     const onSubmit = (data) => {
+      console.log(data)
       createUser(data.email,data.password)
-      .then(result=>{
-        const user=result.user
-        if(user){
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
-            }
-          });
-          Toast.fire({
-            icon: "success",
-            title: "Signed in successfully"
-          });
-          reset()
 
-          navigate(from,{replace:true})
-        }
-     
-      
-     
+      .then(result=>{
+          const loggedUser=result.user;
+          console.log(loggedUser)
+
+          updateUserProfile(data.name,data.photoUrl)
+          
+          .then(()=>{
+            console.log('User Profile has been Updated')
+            reset()
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your work has been saved",
+              showConfirmButton: false,
+              timer: 1500
+            });
+           
+           navigate('/')
+          })
+          .catch(error=>console.log(error))
+
+
       })
     
-  
     }
 
     return (
@@ -87,25 +85,29 @@ const SignUp = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="card-body -my-5">
 
            
-              <div className="form-control">
-
-                <label className="label">
-                  <span className="label-text">First Name</span>
-                </label>
-                <input type="text" {...register("firstName", { required: true })} name='firstName' placeholder="Your First name" className="input input-bordered rounded-none" required />
-                  
-                
-                </div>
+            
 
                 <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Last Name</span>
+                  <span className="label-text"> Name</span>
                 </label>
-                <input type="text" {...register("lastName", { required: true})} name='lastName' placeholder="your last name" className="input input-bordered rounded-none" required />
+                <input type="text" {...register("name", { required: true})} name='name' placeholder="your last name" className="input input-bordered rounded-none" required />
                   
                   
                   {/* Error Alert  */}
-                {errors.lastName?.type==='required'&& <span className='text-sm text-red-600 text-center'>Last Name fill is required !</span>}
+                {errors.name?.type==='required'&& <span className='text-sm text-red-600 text-center'> Name fill is required !</span>}
+                </div>
+
+                {/* Photo URL  */}
+                <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input type="text" {...register("photoUrl", { required: true})}  placeholder="Fil the photo URL" className="input input-bordered rounded-none" required />
+                  
+                  
+                  {/* Error Alert  */}
+                {errors.photoUrl?.type==='required'&& <span className='text-sm text-red-600 text-center'>Last Name fill is required !</span>}
                 </div>
 
 
