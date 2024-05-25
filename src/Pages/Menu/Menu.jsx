@@ -13,6 +13,7 @@ import MenuItems from './MenuItems/MenuItems';
 
 const Menu = () => {
     const [menus]=useMenu([])
+    console.log(menus)
 
 
     const pizza=menus.filter(pz=>pz.category==='pizza').slice(0,4)

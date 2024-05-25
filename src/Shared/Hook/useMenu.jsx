@@ -6,7 +6,7 @@ const [menus,setMenus]=useState([])
 const [loading,setLoading]=useState(false)
 
     useEffect(()=>{
-        fetch('http://localhost:5000/menu')
+        fetch('http://localhost:1000/menu')
         .then(res=>res.json())
         .then(data=>{
 
@@ -15,7 +15,7 @@ const [loading,setLoading]=useState(false)
             setLoading(true)
  
         })
-    },[menus])
+    },[])
 
     return [menus,loading]
 };  

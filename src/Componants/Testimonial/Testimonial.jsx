@@ -18,7 +18,7 @@ const [review,setReview]=useState([])
 
 useEffect(()=>{
 
-    fetch('http://localhost:5000/review')
+    fetch('http://localhost:1000/review')
     .then(res=>res.json())
     .then(data=>setReview(data))
 

@@ -2,30 +2,34 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import useCart from '../../Shared/Hook/useCart/useCart';
+import useAxiosSecure from '../../Shared/Hook/useAxiosSecure/useAxiosSecure';
 
 const FoodCard = ({item}) => {
-
   const {user}=useContext(AuthContext)
-
+  const axiosSecure=useAxiosSecure()
   const {price,image,recipe,name,_id}=item
-
   const navigate = useNavigate()
+  const [,refetch]=useCart()
 
-  const handleAddToCart=(item)=>{
+
+  const handleAddToCart=(food)=>{
+
+    console.log(food)
+    
 
   if(user && user.email){
-    // TODO: // Cart add to Data base 
+//  Cart add to Data base 
 
     const cartItem={
       menuId:_id,
-      email:item.email,
+      email:user.email,
       image,
       price,
       name
     }
 
-    axios.post('http://localhost:5000/carts',cartItem)
+   axiosSecure.post('/carts',cartItem)
     .then(res=>{
       console.log(res.data)
 
@@ -39,7 +43,11 @@ const FoodCard = ({item}) => {
           timer: 1500
         });
 
+     
+
       }
+
+      refetch()
     })
 
   }else{
