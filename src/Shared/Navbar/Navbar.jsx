@@ -28,9 +28,9 @@ const Navbar = () => {
         <li><Link to={'/order/salad'}>Order Food</Link></li>
         <li><Link to={'/dashboard'}>Dashboard</Link></li>
         <li>
-          <Link>
+          <Link to={'/dashboard/myCart'}>
           <FaCartPlus />
-          <div className="badge badge-secondary">+{cart.length}</div>
+          <button className="badge badge-secondary">+{cart.length}</button>
               </Link>
                 </li>
     
@@ -63,8 +63,8 @@ const Navbar = () => {
           <>
           <span className='text-gray-400 text-sm  mx-9'>{user.displayName}</span>
 
-          <div className="avatar online">
-           <div className="w-10 mx-5 rounded-full">
+          <div className="avatar">
+           <div className="w-10 mx-5 online rounded-full">
             <img src={user.photoURL} />
               </div>
                    </div>

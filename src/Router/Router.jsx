@@ -9,7 +9,10 @@ import Order from "../Pages/Order/Order";
 import Login from "../Componants/Login/Login";
 import SignUp from "../Componants/SignUp/SignUp";
 import Dashboard from "../Dashboard/Dashboard";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import MyCarts from "../Dashboard/Dash-Pages/MyCarts/MyCarts";
+import Reservation from "../Dashboard/Dash-Pages/Reservation/Reservation";
+import Mybooking from "../Dashboard/Dash-Pages/Mybooking/Mybooking";
+import MyPayment from "../Dashboard/Dash-Pages/MyCarts/MyPayment/MyPayment";
 
   
 const router = createBrowserRouter([
@@ -45,11 +48,35 @@ const router = createBrowserRouter([
      
     },
 
+    // DASHBOARD ALL ROUTES HERE ////////////
+
     {
       path:'dashboard',
-      element:<PrivateRoute>
-        <Dashboard></Dashboard>
-      </PrivateRoute>
+      element:<Dashboard></Dashboard>,
+      children:[
+      
+        {
+          path:'dashboard/myCart',
+          element:<MyCarts></MyCarts>
+
+        },
+        {
+          path:'dashboard/mypayment',
+          element:<MyPayment></MyPayment>
+
+        },
+        {
+          path:'dashboard/reservation',
+          element:<Reservation></Reservation>
+
+        },
+        {
+          path:'dashboard/mybooking',
+          element:<Mybooking></Mybooking>
+
+        }
+      ]
+      
   }
   ]);
 
