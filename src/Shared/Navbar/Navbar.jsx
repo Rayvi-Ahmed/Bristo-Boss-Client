@@ -28,14 +28,13 @@ const Navbar = () => {
         <li><Link to={'/order/salad'}>Order Food</Link></li>
         <li><Link to={'/dashboard'}>Dashboard</Link></li>
         <li>
-          <Link to={'/dashboard/myCart'}>
+          <Link to='/dashboard/myCart'>
           <FaCartPlus />
           <button className="badge badge-secondary">+{cart.length}</button>
               </Link>
                 </li>
     
     </>
-
     return (
       <div className="navbar fixed z-10 bg-black bg-opacity-30 md:w-full text-white max-w-full md:max-w-screen-lg">
 

@@ -1,11 +1,11 @@
 
-import { FaCalendarAlt, FaHome, FaMoneyBill, FaShoppingCart,} from 'react-icons/fa';
+import { FaCalendarAlt, FaHome, FaList, FaMoneyBill, FaShoppingCart,} from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import React, { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
 import { FadeLoader, PuffLoader } from 'react-spinners';
-import { FaBookBookmark } from 'react-icons/fa6';
+import { FaBookBookmark, FaHouseMedicalCircleCheck, FaSpoon } from 'react-icons/fa6';
 import { GiStarsStack } from 'react-icons/gi';
 
 const Dashboard = () => {
@@ -55,11 +55,11 @@ const Dashboard = () => {
             </div>
            
             <ul className='menu'>
-                <li><NavLink to="/"><FaHome></FaHome>My Home</NavLink>
+                <li><NavLink to="/"><FaHouseMedicalCircleCheck></FaHouseMedicalCircleCheck>User Home</NavLink>
                 </li>
                 <li><NavLink to="dashboard/reservation"><FaCalendarAlt></FaCalendarAlt>Reservation</NavLink>
                 </li>
-                <li><NavLink to="dashboard/payment"><FaMoneyBill></FaMoneyBill>Payment Status</NavLink>
+                <li><NavLink to="dashboard/mypayment"><FaMoneyBill></FaMoneyBill>Payment Status</NavLink>
                 </li>
                 <li><NavLink to="dashboard/myCart"><FaShoppingCart></FaShoppingCart>My Cart</NavLink>
                 </li>
@@ -67,6 +67,18 @@ const Dashboard = () => {
                 </li>
                 <li><NavLink to="dashboard/mybooking"><FaBookBookmark></FaBookBookmark>My Booking</NavLink>
                 </li>
+
+                <div className="divider divider-neutral">Main Menu</div>
+
+                <li><NavLink to="/"><FaHome></FaHome>Home</NavLink>
+                </li>
+                
+                <li><NavLink to="/order"><FaSpoon></FaSpoon>Order</NavLink>
+                </li>
+                
+                <li><NavLink to="/menu"><FaList></FaList>Food Menu</NavLink>
+                </li>
+                
             </ul>
           </div>
 
