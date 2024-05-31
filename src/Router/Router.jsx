@@ -14,6 +14,7 @@ import Reservation from "../Dashboard/Dash-Pages/Reservation/Reservation";
 import Mybooking from "../Dashboard/Dash-Pages/Mybooking/Mybooking";
 import MyPayment from "../Dashboard/Dash-Pages/MyCarts/MyPayment/MyPayment";
 import Review from "../Dashboard/Dash-Pages/Review/Review";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
   
 const router = createBrowserRouter([
@@ -53,7 +54,9 @@ const router = createBrowserRouter([
 
     {
       path:'dashboard',
-      element:<Dashboard></Dashboard>,
+      element:<PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>,
       children:[
       
         {

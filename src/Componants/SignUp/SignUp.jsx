@@ -7,6 +7,7 @@ import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 // react hook form 
 import { useForm} from "react-hook-form"
 import Swal from 'sweetalert2';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const SignUp = () => {
 
@@ -35,18 +36,35 @@ const SignUp = () => {
           console.log(loggedUser)
 
           updateUserProfile(data.name,data.photoUrl)
-          
           .then(()=>{
-            console.log('User Profile has been Updated')
-            reset()
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Your work has been saved",
-              showConfirmButton: false,
-              timer: 1500
-            });
-           
+            const saveUser= {name:data.name, email:data.email}
+            fetch('http://localhost:1000/users',{
+
+            method:"POST",
+            headers:{
+              'content-type':'application/json',
+            },
+            body:JSON.stringify(saveUser)
+
+            })
+            .then(res=>res.json())
+            .then(data=>{
+
+              if(data.instertedId){
+                reset()
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Your work has been saved",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+
+              }
+
+            })
+         
+          
            navigate('/')
           })
           .catch(error=>console.log(error))
@@ -77,7 +95,7 @@ const SignUp = () => {
         </Lottie>
 
          {/* form LOgin  */}
-          <div className="card shrink-0 w-full min-h-screen max-w-sm shadow-2xl bg-transparent rounded-none md:ml-10">
+          <div className="card shrink-0 w-full lg:min-h-screen max-w-sm shadow-2xl bg-transparent rounded-none md:ml-10">
           <div className='py-2 w-full mx-auto'>
             <h1 className='text-center text-2xl font-bold text-slate-600 underline underline-offset-8'>SIGN IN</h1>
           </div>
@@ -85,7 +103,7 @@ const SignUp = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="card-body -my-5">
 
            
-            
+          
 
                 <div className="form-control">
                 <label className="label">
@@ -164,6 +182,8 @@ const SignUp = () => {
               <div>
               </div>
             </form>
+
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
