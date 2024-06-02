@@ -15,6 +15,9 @@ import Mybooking from "../Dashboard/Dash-Pages/Mybooking/Mybooking";
 import MyPayment from "../Dashboard/Dash-Pages/MyCarts/MyPayment/MyPayment";
 import Review from "../Dashboard/Dash-Pages/Review/Review";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import ManagerItem from "../Dashboard/Admin-Pages/ManageItem/ManagerItem";
+import ManagerUser from "../Dashboard/Admin-Pages/ManageUser/ManagerUser";
+import AddItem from "../Dashboard/Admin-Pages/AddItem/AddItem";
 
   
 const router = createBrowserRouter([
@@ -82,6 +85,26 @@ const router = createBrowserRouter([
         {
           path:'dashboard/mybooking',
           element:<Mybooking></Mybooking>
+
+        },
+        {
+          path:'dashboard/manageitem',
+          element:<ManagerItem></ManagerItem>
+
+        },
+        {
+          path:'dashboard/manageuser',
+          element:<ManagerUser></ManagerUser>
+
+        },
+        {
+          path:'dashboard/additems',
+          element:<AddItem></AddItem>
+
+        },
+        {
+          path:'dashboard/managebookings',
+          element:<AddItem></AddItem>
 
         }
       ]

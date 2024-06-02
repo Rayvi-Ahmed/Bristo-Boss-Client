@@ -1,14 +1,17 @@
 
-import { FaCalendarAlt, FaHome, FaList, FaMoneyBill, FaShoppingCart,} from 'react-icons/fa';
+import { FaCalendarAlt, FaHome, FaList, FaMoneyBill, FaShoppingCart, FaUsers,} from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 
 import React, { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
 import { FadeLoader, PuffLoader } from 'react-spinners';
-import { FaBookBookmark, FaHouseMedicalCircleCheck, FaSpoon } from 'react-icons/fa6';
+import { FaBookBookmark, FaHouseMedicalCircleCheck, FaListCheck, FaSpoon } from 'react-icons/fa6';
 import { GiStarsStack } from 'react-icons/gi';
+import { ImSpoonKnife } from "react-icons/im";
 
 const Dashboard = () => {
+
+  const isAdmin= true; 
 
   const {user,loading}=useContext(AuthContext)
   console.log(user,loading)
@@ -17,7 +20,7 @@ const Dashboard = () => {
         <div className='flex'>
           <div className='w-64 min-h-screen  bg-orange-500'>
 
-            <div className='w-32 mx-auto'>
+            <div className='w-48 mx-auto'>
 
             {
               user&& <h1 className='p-2 text-lg font-mono font-bold'>Hello Bro {user.displayName} !!</h1>
@@ -51,11 +54,34 @@ const Dashboard = () => {
             }
 
     
-            <h1 className='text-xl text-center font-bold underline text text-green-800  p-2'>Dashboard</h1>
+            <div className="divider divider-neutral">Your Dashboard</div>
             </div>
            
             <ul className='menu'>
-                <li><NavLink to="/"><FaHouseMedicalCircleCheck></FaHouseMedicalCircleCheck>User Home</NavLink>
+
+
+              {
+                isAdmin?
+
+                // Admin Dashboard?//////
+              
+                <>
+                 <li><NavLink to="/"><FaHouseMedicalCircleCheck></FaHouseMedicalCircleCheck>Admin Home</NavLink>
+                </li>
+                <li><NavLink to="dashboard/additems"><ImSpoonKnife></ImSpoonKnife>Add Items</NavLink>
+                </li>
+                <li><NavLink to="dashboard/manageitem"> <FaListCheck></FaListCheck>Manage Item</NavLink>
+                </li>
+                <li><NavLink to="dashboard/managebookings"><FaBookBookmark></FaBookBookmark>Manage Bookings</NavLink>
+                </li>
+                <li><NavLink to="dashboard/manageuser"><FaUsers></FaUsers>Manage users</NavLink>
+                </li>
+            
+                </> :
+
+                // User Dashboard///
+                <>
+               <li><NavLink to="/"><FaHouseMedicalCircleCheck></ FaHouseMedicalCircleCheck>User Home</NavLink>
                 </li>
                 <li><NavLink to="dashboard/reservation"><FaCalendarAlt></FaCalendarAlt>Reservation</NavLink>
                 </li>
@@ -67,6 +93,11 @@ const Dashboard = () => {
                 </li>
                 <li><NavLink to="dashboard/mybooking"><FaBookBookmark></FaBookBookmark>My Booking</NavLink>
                 </li>
+
+                </>
+              }
+              
+                {/* Shared Menu for Dashboard */}
 
                 <div className="divider divider-neutral">Main Menu</div>
 

@@ -40,7 +40,7 @@ const updateUserProfile=(name, photo)=>{
 
 const GoogleSignIn=()=>{
     setLoading(true)
-    signInWithPopup(auth,googleProvider)
+    return signInWithPopup(auth,googleProvider)
 }
 
 
